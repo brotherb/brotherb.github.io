@@ -1,0 +1,258 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>程序员的老生常谈之操作系统 | Spike's Blog</title>
+  <meta name="author" content="Spike">
+  
+  <meta name="description" content="This is Spike's personal blog">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="程序员的老生常谈之操作系统"/>
+  <meta property="og:site_name" content="Spike's Blog"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  <link href="/favicon.png" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Spike's Blog" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'true']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+</head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">Spike's Blog</a></h1>
+  <h2><a href="/">Keep It Simple</a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+  <li><a href="/atom.xml">RSS</a></li>
+    
+      <li><a href="/">首页</a></li>
+    
+      <li><a href="/archives">归档</a></li>
+    
+      <li><a href="/about">关于</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div>
+</header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2013-08-25T05:57:45.000Z"><a href="/2013/08/25/programmer's-platitude2/">8月 25 2013</a></time>
+      
+      
+  
+    <h1 class="title">程序员的老生常谈之操作系统</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>今天早上和发小出去打球，意外扭伤了脚踝，回了家网络也不好，百无聊赖之际，就想写点东西。</p>
+<p><a href="http://brotherb.info/2013/07/27/programmers-platitude1/">上篇文章</a>里，我大致谈了我对开发工具的一些看法，以及我比较喜欢的开发工具。本文主要谈谈我对操作系统的看法，其中不涉及任何有关内核、原理等方面的内容，单纯地从一个使用者的角度来谈。<a id="more"></a></p>
+<h2>Linux</h2>
+<h3>折腾历史</h3>
+<p>第一次接触Linux是在2010年夏天，那时学院里面组织一些同学去大连东软参加实训。期间，我们要开发一个Linux下的即时通讯软件，我们在虚拟机中安装了Red Hat Linux，使用vi写代码。当时是十分痛苦的，因为vi很难用。我当时采取的办法是在虚拟机外面用vs写代码，然后拖到虚拟机里面编译。现在想来真是幼稚、低端。</p>
+<p>第二次接触Linux是2010年冬天到2011年夏天，当时我参加了<a href="http://en.wikipedia.org/wiki/RoboCup_2D_Soccer_Simulation_League" target="_blank">Robocup 2D仿真组</a>的比赛。其中，我们需要在Ubuntu10.04上面安装仿真平台、工具等，并调试球队。那个时候算正儿八经用Linux了，学习了基本的命令，在不清楚原理的情况下照猫画虎编写了第一段shell脚本。</p>
+<p>之后一直在使用Linux，但是仅仅局限于尝试各种Linux发行版、开源软件。那个时候正值大三，上的课听不懂，下来也不好好学。除了打游戏，就是折腾系统了。当时把折腾的心得写成了一篇<a href="http://user.qzone.qq.com/1078039894/#!app=2&amp;via=QZ.HashRefresh&amp;pos=1340298002" target="_blank">日志</a>，现在觉得认识比较浅薄，当笑话看吧！</p>
+<p>今年4月份，也不知为何心血来潮，就想玩玩<a href="https://www.archlinux.org/" target="_blank">archlinux</a>，它和<a href="http://www.gentoo.org/" target="_blank">Gentoo</a>都是比较好玩的。但是后者我没敢玩，那个需要长时间的编译等待，中间还有出错的可能。</p>
+<p>算下来，我使用过的Linux发行版有那么七八种。现在我使用两种，笔记本上的Arch和台式机上的Ubuntu。</p>
+<h3>Linux发行版</h3>
+<p>其实，我们常说的Linux指的是Linux发行版，即Ubuntu，Fedora这些。Linux发行版的多达几百种(详情请看<a href="distrowatch.com">这里</a>)。而Linux只是一个内核的名字而已。一个Linux发行版是由Linux内核和运行在其上的应用软件构成的。</p>
+<p>首先，不同发行版的内核是不尽相同的。当然我并不是指，Linux内核的源代码有很多种。<a href="https://github.com/torvalds/linux" target="_blank">Linux源码</a>只有一份，控制在他的创造者linus torvalds手中。但是，Linux内核在编译时有很多选项可以选择，如果用来做桌面||服务器系统，就多选择一些功能;如果做嵌入式系统，就精简一些。同时，也有很多参数可以设置，如网络参数，文件系统参数等等，老是说centos做服务器比较“稳定”，可能就在内核参数上做了一些调整(当然，应该远不止这些，应用软件也都应该是最稳定的版本)。</p>
+<p>其次，不同的发行版使用不同的应用软件。其中比较重要的有：</p>
+<ol>
+<li>包管理器(PM, package manager)</li>
+<li>桌面环境(DE, desktop environment)</li>
+<li>窗口管理器(WM, windows manager)</li>
+<li>显示管理器(DM, display manager)</li>
+<li>系统和服务管理器(system and service manager)</li>
+<li>软件中心(software center)</li>
+<li>……</li>
+</ol>
+<p>具体哪个发行版使用那些软件这里就不细说了。同一个发行版的不同的版本，采用的应用软件也不尽相同。当然，桌面环境的不同，人们一眼就看出来了，很多人误以为那就是不同的Linux，其实就是同一个操作系统里装了不同的桌面环境而已(甚至是同一个桌面环境，但只是把主题改了一下，加了些Dock之类的applet而已)。感兴趣的可以自行google，自己装一些玩玩。我自己玩Arch的时候尝试了大部分主流的桌面环境和窗口管理器，但后来还是因为没什么耐心去玩主题，换回了KDE。</p>
+<h3>使用感受</h3>
+<p>我不知道有多少人使用Linux是因为受到了王垠的<a href="http://www.chinaunix.net/old_jh/46/293550.html" target="_blank">这篇文章</a>的影响(后来他又写了<a href="http://blog.sina.com.cn/s/blog_5d90e82f0101ip7f.html" target="_blank">另一篇文章</a>推翻了前者)。就我而言，我没有任何<a href="http://brotherb.info/2013/08/01/how-religion-destroys-programmers/">信仰</a>。我只选择最合适的。</p>
+<p>由于只是个人使用，没玩过服务器，没玩过高性能计算，Linux和Windows在性能和稳定性方面的差异，我没什么发言权。日常使用方面，如果不玩游戏不用网银(可惜，这是不可能的。:))，Linux可以代替Windows，这是没问题的。以下是我能想到的Linux的优点：</p>
+<ol>
+<li>免费。</li>
+<li>命令行十分强大，系统配置方便，对开发者友好。</li>
+<li>得益于<a href="http://en.wikipedia.org/wiki/Virtual_file_system" target="_blank">虚拟文件系统(VFS)</a>，Linux可以直接读写NTFS文件系统，这是Linux的先进之处。而Windows要读写ext文件系统，则需要借助第三方软件。</li>
+<li>安全，不多说了。不过，<strong>对个人用户来讲没什么意义</strong>。用户要是一路sudo，那安全性有没有都一样。我Windows裸奔了几年都没出过事。</li>
+<li>定制性强，外围的应用软件想用什么用什么，包括桌面环境。</li>
+<li>支持UTF-8。</li>
+<li>关机比较快。:)</li>
+</ol>
+<p>缺点：</p>
+<ol>
+<li>缺少一些重要软件的替代方案，或者替代方案不够好。如Adobe系列，QQ，迅雷等(别折腾wine，蛋疼死你！)。</li>
+<li>部分软件安装比较麻烦。由于发行版众多，包管理器不一，一些软件是以源码的形式提供的，得自己编译安装。而Windows一个.exe就全搞定了。</li>
+</ol>
+<p>总的来说，Linux是先进的，但是先进的不一定是友好的，尤其是对普通用户来说。</p>
+<p><strong>我不会再去折腾Linux的各种发行版和软件了，那除了锻炼你的运维能力(耐心)之外，对你没有任何提高。</strong>理解Linux内核的原理是我下一步要做的事情。</p>
+<h2>Windows</h2>
+<p>Windows7用着真心不错，这是良心话。我不会天天用它,还不停地骂它。但我不会升级Win8,我认为Win8的战略完全是错的。<strong>统一内核是没有错的，但是妄图统一用户界面和交互方式实在是大错特错</strong>。在没有触屏的笔记本上，用鼠标点击和拖动来模拟触屏，是相当糟糕的用户体验。但是，我非常欣赏Win8在其他方面做的改进。</p>
+<p>我觉得如果Windows能在以下方面有所改进，我会非常高兴：</p>
+<ol>
+<li>更好的命令行。Windows的cmd太糟糕了，虽然后来做了个powershell，能兼容部分Linux命令，但还是太挫了。环境变量的管理也非常差。</li>
+<li>拥抱UTF-8标准。Windows的默认标准是Ascii，如果你用VS，你会发现，有时候你写的中文||日文注释被解析成了别的什么东西，会导致一些蛋疼的问题。</li>
+</ol>
+<p>更多的槽点，可以看看<a href="http://www.cnblogs.com/Chrome/archive/2012/06/07/2539803.html" target="_blank">这篇文章</a>，我觉得是说到了点子上。</p>
+<p>当然了，对于一般用户来说，Windows完全够用了，也足够友好。但是对于开发者来说，还远远不够。我不清楚修改这些问题的难度，但是如果这些毛病来源于最初的设计问题，那么要改就要伤筋动骨，甚至推倒重来，那么必然会破坏兼容性，破坏了兼容性，Windows就完了。如何跟上Linux的先进性，又不破坏兼容性，是Windows要考虑的重要问题。不然，你搞100个metro界面出来也白搭，这些都是表面功夫，内在的差距一定会越拉越大。</p>
+<h2>OS X</h2>
+<p>苹果的OS X我是最不熟悉的。但曾玩过。12年暑假我借了我二姨的macbook pro可劲折腾了一段时间，二姨的mbp装的是xp，唯一的用途是上QQ，以及用PPS看电视，暴殄天物啊，我马上拿过来彻底玩弄了一番。本科毕业前折腾黑苹果未遂。</p>
+<p>OS X兼具Linux和Windows的优点，它是对黑客和普通老百姓都非常友好的操作系统。说它是the most advanced OS一点都不为过。</p>
+<p>首先，它脱胎于BSD系统，符合POSIX标准，拥有码农们趁手的命令行工具。</p>
+<p>其次，大部分软件都有mac版，装软件比windows还简单。试想你一边在命令行里敲命令，一边聊macQQ，一边用迅雷for mac下片，那是多么幸福的事情？并且，部分mac独占的视频||音频处理软件成为了行业标准。苹果电脑成为了设计师标配。</p>
+<p>第三，系统很华丽，机器很好看，应用程序很精美。</p>
+<p>缺点也有，就是软件数量相对Windows来说要少一些，游戏少。</p>
+<p>并且，搭载OS X的机器，售价都偏贵，“学生狗”和屌丝不太能买得起。于是“黑苹果”应运而生。不过我最终因为显卡驱动的问题没折腾成功，待日后挣钱了直接上白的。</p>
+<h2>总结</h2>
+<p>其实没什么好总结的，所以用非常没水平的一句话来说吧：<strong>各有各的用途</strong>。关键在于我们是什么用户，我们要做什么？</p>
+
+      
+    </div>
+    <footer>
+      
+        
+  
+  <div class="categories">
+    <a href="/categories/闲聊/">闲聊</a>
+  </div>
+
+        
+  
+  <div class="tags">
+    <a href="/tags/操作系统/">操作系统</a>, <a href="/tags/windows/">windows</a>, <a href="/tags/linux/">linux</a>, <a href="/tags/osX/">osX</a>
+  </div>
+
+        <!-- Baidu Button BEGIN -->
+        <div id="bdshare" class="bdshare_t bds_tools get-codes-bdshare">
+        <span class="bds_more">分享到：</span>
+        <a class="bds_qzone"></a>
+        <a class="bds_tsina"></a>
+        <a class="bds_tqq"></a>
+        <a class="bds_renren"></a>
+        <a class="bds_t163"></a>
+        <a class="shareCount"></a>
+        </div>
+        <script type="text/javascript" id="bdshare_js" data="type=tools&amp;uid=2270064" ></script>
+        <script type="text/javascript" id="bdshell_js"></script>
+        <script type="text/javascript">
+        document.getElementById("bdshell_js").src = "http://bdimg.share.baidu.com/static/js/shell_v2.js?cdnversion=" + Math.ceil(new Date()/3600000)
+        </script>
+        <!-- Baidu Button END -->
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+<section id="comment">
+<!-- Duoshuo Comment BEGIN -->
+  <div class="ds-thread"></div>
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"brotherb"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = 'http://static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+  </script>
+<!-- Duoshuo Comment END -->        
+</section>
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="搜索">
+    <input type="hidden" name="q" value="site:brotherb.info">
+  </form>
+</div>
+
+  
+<div class="widget tag">
+  <h3 class="title">分类</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/C/">C</a><small>1</small></li>
+  
+    <li><a href="/categories/python/">python</a><small>1</small></li>
+  
+    <li><a href="/categories/译文/">译文</a><small>2</small></li>
+  
+    <li><a href="/categories/读书/">读书</a><small>1</small></li>
+  
+    <li><a href="/categories/闲聊/">闲聊</a><small>4</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tagcloud">
+  <h3 class="title">标签云</h3>
+  <div class="entry">
+    <a href="/tags/Clojure/" style="font-size: 10.00px;">Clojure</a><a href="/tags/C语言/" style="font-size: 10.00px;">C语言</a><a href="/tags/IDE/" style="font-size: 10.00px;">IDE</a><a href="/tags/blog/" style="font-size: 10.00px;">blog</a><a href="/tags/github/" style="font-size: 10.00px;">github</a><a href="/tags/hexo/" style="font-size: 10.00px;">hexo</a><a href="/tags/linux/" style="font-size: 10.00px;">linux</a><a href="/tags/osX/" style="font-size: 10.00px;">osX</a><a href="/tags/python/" style="font-size: 10.00px;">python</a><a href="/tags/windows/" style="font-size: 10.00px;">windows</a><a href="/tags/函数式编程/" style="font-size: 10.00px;">函数式编程</a><a href="/tags/哲学/" style="font-size: 20.00px;">哲学</a><a href="/tags/思考/" style="font-size: 10.00px;">思考</a><a href="/tags/折腾/" style="font-size: 10.00px;">折腾</a><a href="/tags/操作系统/" style="font-size: 10.00px;">操作系统</a><a href="/tags/生活/" style="font-size: 10.00px;">生活</a><a href="/tags/编程感悟/" style="font-size: 20.00px;">编程感悟</a><a href="/tags/编辑器/" style="font-size: 10.00px;">编辑器</a><a href="/tags/读书/" style="font-size: 10.00px;">读书</a>
+  </div>
+</div>
+
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2013 Spike
+  
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+</body>
+</html>

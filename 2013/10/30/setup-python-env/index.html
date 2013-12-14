@@ -1,0 +1,249 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>我的python环境配置 | Spike's Blog</title>
+  <meta name="author" content="Spike">
+  
+  <meta name="description" content="This is Spike's personal blog">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="我的python环境配置"/>
+  <meta property="og:site_name" content="Spike's Blog"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  <link href="/favicon.png" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Spike's Blog" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'true']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+</head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">Spike's Blog</a></h1>
+  <h2><a href="/">Keep It Simple</a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+  <li><a href="/atom.xml">RSS</a></li>
+    
+      <li><a href="/">首页</a></li>
+    
+      <li><a href="/archives">归档</a></li>
+    
+      <li><a href="/about">关于</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div>
+</header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2013-10-30T07:49:00.000Z"><a href="/2013/10/30/setup-python-env/">10月 30 2013</a></time>
+      
+      
+  
+    <h1 class="title">我的python环境配置</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>我使用ubuntu12.04,系统自带的python版本是2.7.3。在/usr/bin目录下面。不要动它，如果2.7.3可以满足需要，就看下面的一般配置就足够了。</p>
+<h2>一般配置</h2>
+<ol>
+<li>安装setuptools</li>
+<li>安装pip</li>
+<li>安装virtualenvwrapper(用pip，pip会自动安装目标包的依赖包如virtualenv等)</li>
+<li>配置好virtualenvwrapper(见<a href="http://virtualenvwrapper.readthedocs.org/en/latest/" target="_blank">官方文档</a>),并创建一个隔离的python环境(以后一般的工作都在这个环境中进行，假定这个环境的名字是dev)。</li>
+<li>进入dev。</li>
+<li>sudo apt-get install Python-dev(下一步中安装pyzmq需要这一步)</li>
+<li>安装ipython, pyzmq, jinja2, tornado(这一步是为了安装ipython notebook)</li>
+</ol>
+<p>这样python的环境基本就配置好了，一般使用ipython notebook作为自己的repl，这个相当给力（此前我一直使用ipython qtconsole，但用了notebook之后，感觉qtconsole弱爆了）。<a id="more"></a></p>
+<p><strong><em>FAQ</em></strong></p>
+<p>为什么要用virtualenv？</p>
+<p>答：系统自带的python，它的包搜索路径下有很多ubuntu系统自带的包，而这些包对我们做开发是不需要的。如果你装了pip，可以用pip freeze命令查看当前版本python安装了哪些packages。简单来说，我就是看着这些多余的东西很不爽，所以自己弄一个环境，里面只有自己需要的包，很清爽。更深层次的原因，virtualenv可以解决包的版本依赖问题，比如A和B都依赖第三方的C包，但是依赖的C包的版本又不同。<strong>注意：virtualenv只能解决包版本依赖问题，它不是一个python的版本管理器。</strong></p>
+<h2>python版本管理</h2>
+<p>如果我既要使用python2.7,又要使用3.3怎么办？这里我介绍3种方法。</p>
+<p><strong>1. 不好的做法</strong></p>
+<p>下载相应版本的python源代码(这里假定就是python3.3.2)，安装。一般来讲就是3板斧：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre>1
+2
+3
+</pre></td><td class="code"><pre>./configure
+<span class="title">make</span>
+<span class="title">sudo</span> make install
+</pre></td></tr></table></figure>
+
+<p>然后，python3.3就装到/usr/local/bin目录下面了(如果编译的时候不指定prefix的话，默认的路径就是/usr/local/bin)。在我的环境变量$PATH里，/usr/local/bin是排在/usr/bin前面的，所以我的系统的默认python就成了新安装的python3.3了。</p>
+<p>下图是我的/usr/local/bin和/usr/bin目录：</p>
+<p><img src="../../../../images/20131030/1.png" alt=""></p>
+<p>切换2.7和3.3，就像是在玩一个游戏，很无聊的一个游戏。本质上就是决定python这个命令到底指的是谁？方法有很多，做软链接、修改/usr/local/bin和/usr/bin的顺序（即选择命令的优先级），或者干脆输入的时候指定python的版本，如python2,python2.7，python3,python3.3等等(但我很讨厌多敲这么些个字母)。</p>
+<p>这个做法缺点比较明显，主要有以下几点：</p>
+<ol>
+<li>你替换了系统的python，可能会导致很多问题，因为ubuntu其实集成了很多python有关的东西，修改系统的python版本可能会出问题。比如ibus输入法(当然，我现在已经不用ibus了，但这不代表别的其他软件不会出问题)。</li>
+<li>切换麻烦。不止是python有2.7和3.3之分，virtualenv，pip，easy_install其实都对应着一个python的版本，上图已经展示得很清楚了。后面不带版本号的命令其实就是带版本号的命令的一个拷贝。你python命令改了(比方从3.3改回了2.7），pip什么的也得跟着改，不然，你虽然用的是2.7的python，但你pip install的时候，调用的还是pip3.3，还是为python3.3装包。所以，改的地方很多。我想过写一个脚本来做，但是觉得很不优雅。而且，每当你安装新的python软件，比如ipython，这个脚本都要添加相应的切换命令。</li>
+</ol>
+<p>所以我说，这是一种不好的做法，一种非常低端的做法。</p>
+<p><strong>2. 好的做法</strong></p>
+<p>使用<a href="https://github.com/yyuu/pyenv" target="_blank">pyenv</a>,<a href="https://github.com/saghul/pythonz" target="_blank">pythonz</a>或者<a href="https://github.com/utahta/pythonbrew" target="_blank">pythonbrew</a>。其中，pythonbrew已经长期无人打理了，作者建议使用pyenv。</p>
+<p>我这里使用了pyenv，这是一个日本人(一个shell hacker)做的，文档写的非常认真，非常细致，包括这个工具的基本实现原理都讲得清清楚楚。pyenv是纯粹的shell脚本写的，不依赖于python。</p>
+<p>它包含最基本的安装、卸载和切换python版本。一般的工具，切换了python版本，其实是整个全局都换了，不管在哪都是这个版本。但pyenv<strong>最牛逼的地方</strong>，就是能够指定，在哪个目录下用哪个版本的python，屌爆了有没有？比如，我有个项目要用python3,我就cd到这个项目目录，然后输入</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre><span class="title">pyenv</span> local <span class="number">3</span>.<span class="number">3</span>.<span class="number">2</span>
+</pre></td></tr></table></figure>
+
+<p>那么当我进入这个目录的时候，python版本就变成了3.3.2,出去以后就是别的。</p>
+<p>此外，pyenv还支持Cpython以外的其他平台的python实现，如Jython，Pypy等等。如果想用，直接去看它的文档吧，我就不翻译了。</p>
+<p><strong>3. 最好的做法</strong></p>
+<p>虽然在「好的做法」这一节，我折腾的很high。但是当我打开<a href="http://www.jetbrains.com/pycharm/" target="_blank">Pycharm</a>的时候，我发现我讲的大多是多余的。当然了，如果你是Vimer或者Emacser这种硬核玩家，那么前面的内容是非常有用的。</p>
+<p>Pycharm提供了强大的功能，帮助你管理你的python版本。每一个工程，你都可以选择想要的python interpreter。选择了这个以后，剩下的你就不用管了，Pycharm帮你打理好了一切，包括pip，ipython，这些工具对应的版本都自动的帮你调过来了。</p>
+<p>细细想来，其实我们花了很多时间去做一些吃力不讨好的事情，但是这些事情跟我们要开发的东西没有任何关系，IDE的作用就是帮我们打理好一切，让我们专注于真正要做的事情，要实现的功能。不要给自己添麻烦，用最有效的，而不是最复杂的，最难的。</p>
+<p><strong>ps：我真的不是来打广告的。</strong></p>
+
+      
+    </div>
+    <footer>
+      
+        
+  
+  <div class="categories">
+    <a href="/categories/python/">python</a>
+  </div>
+
+        
+  
+  <div class="tags">
+    <a href="/tags/python/">python</a>, <a href="/tags/折腾/">折腾</a>
+  </div>
+
+        <!-- Baidu Button BEGIN -->
+        <div id="bdshare" class="bdshare_t bds_tools get-codes-bdshare">
+        <span class="bds_more">分享到：</span>
+        <a class="bds_qzone"></a>
+        <a class="bds_tsina"></a>
+        <a class="bds_tqq"></a>
+        <a class="bds_renren"></a>
+        <a class="bds_t163"></a>
+        <a class="shareCount"></a>
+        </div>
+        <script type="text/javascript" id="bdshare_js" data="type=tools&amp;uid=2270064" ></script>
+        <script type="text/javascript" id="bdshell_js"></script>
+        <script type="text/javascript">
+        document.getElementById("bdshell_js").src = "http://bdimg.share.baidu.com/static/js/shell_v2.js?cdnversion=" + Math.ceil(new Date()/3600000)
+        </script>
+        <!-- Baidu Button END -->
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+<section id="comment">
+<!-- Duoshuo Comment BEGIN -->
+  <div class="ds-thread"></div>
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"brotherb"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = 'http://static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+  </script>
+<!-- Duoshuo Comment END -->        
+</section>
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="搜索">
+    <input type="hidden" name="q" value="site:brotherb.info">
+  </form>
+</div>
+
+  
+<div class="widget tag">
+  <h3 class="title">分类</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/C/">C</a><small>1</small></li>
+  
+    <li><a href="/categories/python/">python</a><small>1</small></li>
+  
+    <li><a href="/categories/译文/">译文</a><small>2</small></li>
+  
+    <li><a href="/categories/读书/">读书</a><small>1</small></li>
+  
+    <li><a href="/categories/闲聊/">闲聊</a><small>4</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tagcloud">
+  <h3 class="title">标签云</h3>
+  <div class="entry">
+    <a href="/tags/Clojure/" style="font-size: 10.00px;">Clojure</a><a href="/tags/C语言/" style="font-size: 10.00px;">C语言</a><a href="/tags/IDE/" style="font-size: 10.00px;">IDE</a><a href="/tags/blog/" style="font-size: 10.00px;">blog</a><a href="/tags/github/" style="font-size: 10.00px;">github</a><a href="/tags/hexo/" style="font-size: 10.00px;">hexo</a><a href="/tags/linux/" style="font-size: 10.00px;">linux</a><a href="/tags/osX/" style="font-size: 10.00px;">osX</a><a href="/tags/python/" style="font-size: 10.00px;">python</a><a href="/tags/windows/" style="font-size: 10.00px;">windows</a><a href="/tags/函数式编程/" style="font-size: 10.00px;">函数式编程</a><a href="/tags/哲学/" style="font-size: 20.00px;">哲学</a><a href="/tags/思考/" style="font-size: 10.00px;">思考</a><a href="/tags/折腾/" style="font-size: 10.00px;">折腾</a><a href="/tags/操作系统/" style="font-size: 10.00px;">操作系统</a><a href="/tags/生活/" style="font-size: 10.00px;">生活</a><a href="/tags/编程感悟/" style="font-size: 20.00px;">编程感悟</a><a href="/tags/编辑器/" style="font-size: 10.00px;">编辑器</a><a href="/tags/读书/" style="font-size: 10.00px;">读书</a>
+  </div>
+</div>
+
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2013 Spike
+  
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+</body>
+</html>

@@ -1,0 +1,319 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>关于指针和动态内存分配 | Spike's Blog</title>
+  <meta name="author" content="Spike">
+  
+  <meta name="description" content="This is Spike's personal blog">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="关于指针和动态内存分配"/>
+  <meta property="og:site_name" content="Spike's Blog"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  <link href="/favicon.png" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Spike's Blog" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'true']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+</head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">Spike's Blog</a></h1>
+  <h2><a href="/">Keep It Simple</a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+  <li><a href="/atom.xml">RSS</a></li>
+    
+      <li><a href="/">首页</a></li>
+    
+      <li><a href="/archives">归档</a></li>
+    
+      <li><a href="/about">关于</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div>
+</header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2013-07-30T09:24:06.000Z"><a href="/2013/07/30/c-advanced-topics-1/">7月 30 2013</a></time>
+      
+      
+  
+    <h1 class="title">关于指针和动态内存分配</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>最近在家有空的时候，在学习一些基础的东西，如操作系统和C语言。两个体会：</p>
+<ol>
+<li>C语言非常深奥，尤其是你越往深了学，你就发现你还有很多底层的东西是不知道的。</li>
+<li>不同编程语言，它们有时会混淆在一起，增加了思考的难度。</li>
+</ol>
+<p>对于上面的第2点，归根结底来说是因为不懂底层，不懂内幕，不了解语言的类型系统（所有编程语言的基础都是类型系统）。</p>
+<p>最近阅读了一些C语言方面的进阶读物，感受颇深。现在以问答的形式，对这一阶段了解到的东西做一个总结。<a id="more"></a></p>
+<h3><strong>指针存的是什么</strong></h3>
+<hr>
+<p>答：指针里面只存一个内存地址。一个指针占多少个字节<strong>取决于机器</strong>。如：32位为4个字节，64位为8个字节(简单起见，<strong>以下所有讨论都只针对32位平台</strong>)。</p>
+<h3><strong>是吗？帮我解释一下这件事：</strong></h3>
+<hr>
+<figure class="highlight lang-C"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+</pre></td><td class="code"><pre><span class="title">int</span> *p1;
+<span class="title">char</span> *p2;
+<span class="title">p1</span>++;
+<span class="title">p2</span>++;
+</pre></td></tr></table></figure>
+
+<p>这里，p1实际上加了4,也就是一个int的长度。p2加了1,也就是一个char的长度。指针加减，步长总是等于它所指的类型的长度，那么这个长度的信息（即：它所指类型的信息），指针应该保存吧？</p>
+<p><strong>答：不，你想多了，这是编译器要考虑的问题。</strong></p>
+<h3><strong>那好，请再帮我解释一下这件事：</strong></h3>
+<hr>
+<figure class="highlight lang-C"><table><tr><td class="gutter"><pre>1
+2
+</pre></td><td class="code"><pre><span class="keyword">int</span> <span class="variable">*p</span> = (<span class="keyword">int</span> <span class="variable">*)</span>malloc(<span class="number">100</span><span class="variable">*sizeof</span>(<span class="keyword">int</span>));
+free(p);
+</pre></td></tr></table></figure>
+
+<p>这里，我首先在堆上分配了100×4个字节的内存，然后把这段内存(开头)的地址给了p指针。那我free(p)的时候，我怎么知道我要释放400个字节？指针应该有保存这个信息吧？</p>
+<p><strong>答：不，你想多了，这是编译器(和操作系统)要考虑的问题。</strong></p>
+<h3><strong>数组名就是指针吧？</strong></h3>
+<hr>
+<figure class="highlight lang-C"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+</pre></td><td class="code"><pre><span class="keyword">int</span> a[<span class="number">5</span>] = {<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>};
+<span class="keyword">int</span> <span class="variable">*p</span> = a;
+<span class="keyword">printf</span>(<span class="string">"<span class="variable">%d</span>\n"</span>, a[<span class="number">3</span>]);
+<span class="keyword">printf</span>(<span class="string">"<span class="variable">%d</span>\n"</span>, p[<span class="number">3</span>]);
+</pre></td></tr></table></figure>
+
+<p>你看，这俩基本上就一样嘛。都能通过下标来引用数组中的元素。</p>
+<p><strong>答</strong>：错了。数组名是个常量，它的值就是第一个元素的地址，<code>int *p = a;</code>等价于<code>int *p = &amp;a[0];</code>。而指针是个变量。声明数组<code>a[5]</code>的时候，会给你分配20个字节;而声明<code>int *p</code>的时候，只给你分配4个字节。至于你说的下标引用，只是编译器处理的时候，赋予相同的操作而已。<code>a[x]</code>，相当于<code>*(a+x)</code>，根据加法交换律，也就等于<code>*(x+a)</code>。<strong>所以，<code>a[3]</code>也可以写成<code>3[a]</code>，不信你试试。</strong></p>
+<h3><strong>函数传参的两种方式：值传递和地址传递的区别？</strong></h3>
+<hr>
+<p><strong>答</strong>：你看的是谭浩强的「C语言程序设计」书吗？那从现在开始，把那些“传引用，传地址，传指针”这些说法统统扔掉，C语言传参只有<strong>一种</strong>方式：就是<strong>值传递</strong>。地址难道不是值吗？为什么要把它搞的那么复杂？一个变量，它一出生就有两个“值”，<strong>一个是它内存里面存放的位序列，另一个就是它的地址。</strong></p>
+<p>考虑以下两个函数：</p>
+<figure class="highlight lang-C"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+</pre></td><td class="code"><pre>void swap1(<span class="keyword">int</span> a, <span class="keyword">int</span> b)
+{
+    <span class="keyword">int</span> temp = a;
+    a = b;
+    b = temp;
+}
+void swap2(<span class="keyword">int</span> <span class="variable">*a</span>, <span class="keyword">int</span> <span class="variable">*b</span>)
+{
+    <span class="keyword">int</span> temp = <span class="variable">*a</span>;
+    <span class="variable">*a</span> = <span class="variable">*b</span>;
+    <span class="variable">*b</span> = temp;
+}
+<span class="keyword">int</span> main()
+{
+    <span class="keyword">int</span> a = <span class="number">1</span>, b = <span class="number">2</span>;
+    swap1(a, b);
+    swap2(&a, &b);
+    <span class="keyword">return</span> <span class="number">0</span>;
+}
+</pre></td></tr></table></figure>
+
+<p>调用swap1的时候，swap1在它的栈空间内创建了两个int型变量，分别把a和b的内容赋给它们。调用swap2的时候，swap2在它的栈空间内创建两个int型的指针变量，分别把a和b的地址赋给它们。函数声明和函数调用这两个语句就像是两截管子拧在一起一样(这个比喻懂吧？)。</p>
+<h3><strong>malloc(size_t)到底分配了多少内存？</strong></h3>
+<hr>
+<p><strong>答</strong>：有两种情况</p>
+<ol>
+<li>在失败的情况下是0,并返回一个NULL指针。</li>
+<li>在成功的情况下分配大于size_t的内存</li>
+</ol>
+<p>第二种情况的产生的原因是两方面的。一方面，在学习操作系统存储器管理的时候，我们知道有<strong>“内存空闲块链表”</strong>这样的东西，这个链表每个节点保存一段空闲内存的信息。在分配内存的时候，系统将这个节点分配给了我们，连同节点里面的内存描述信息也一起分配了，如：这块内存有多大，下一块空闲块的地址等(就像我们摘苹果的时候，会把一些额外的树枝也扯下来)。这造成了一部分开销。另一方面，出于减少内存碎片的考虑，要进行内存对齐，<strong>这部分具体请看参考资料第3篇</strong>。</p>
+<p>所以，malloc总是会多消耗一些内存。这里就回答了上面提到的free()函数怎么知道要释放多少内存的问题，答：从分配到的内存块(信息头)中获取到的。所以如果不小心修改了这些内存块的信息头，在释放的时候极有可能导致程序崩溃。</p>
+<h3><strong>为什么malloc这么慢？</strong></h3>
+<hr>
+<p>答：这个问题也可以这么问：为什么堆内存分配这么慢，或，为什么动态内存分配这么慢？原因很简单，<strong>因为堆内存分配比较复杂</strong>。具体怎么复杂，<strong>请看参考资料第5篇</strong>。</p>
+<h3><strong>如何提高malloc的性能？</strong></h3>
+<hr>
+<p><strong>答</strong>：这个问题问的也有问题，你想问的可能是：我这里大量使用了动态内存分配，应该如何提高程序的性能？答：<strong>减少malloc的调用次数</strong>。如：一次分配一个较大的内存块，或者，在不必要的情况下，不要使用动态内存分配。</p>
+<p>「编程珠玑」p136中说道:</p>
+<blockquote>
+<p>最显著的改进就是用只分配一个较大内存块的方案来替换通用内存分配。这样就消除了很多开销较大的调用，而且也使空间的利用更加有效率。</p>
+</blockquote>
+<p>细细想来，很多优化也确实这样做的。如C++ STL中的vector,list等数据结构，以及Python中的PyListObject和PyDictObject对象。</p>
+<h3><strong>参考资料</strong></h3>
+<hr>
+<ol>
+<li>[「C和指针」第二版]</li>
+<li><a href="http://pw1.netcom.com/~tjensen/ptr/pointers.htm" target="_blank">A TUTORIAL ON POINTERS AND ARRAYS IN C</a></li>
+<li><a href="http://blog.csdn.net/elpmis/article/details/4500917" target="_blank">关于glibc的malloc内存对齐</a></li>
+<li><a href="http://prog21.dadgum.com/179.html" target="_blank">How much memory does malloc(0) allocate?</a></li>
+<li><a href="http://mikehearn.wordpress.com/2006/10/26/why-is-heap-allocation-slow/" target="_blank">why is heap allocation slow</a></li>
+</ol>
+
+      
+    </div>
+    <footer>
+      
+        
+  
+  <div class="categories">
+    <a href="/categories/C/">C</a>
+  </div>
+
+        
+  
+  <div class="tags">
+    <a href="/tags/C语言/">C语言</a>
+  </div>
+
+        <!-- Baidu Button BEGIN -->
+        <div id="bdshare" class="bdshare_t bds_tools get-codes-bdshare">
+        <span class="bds_more">分享到：</span>
+        <a class="bds_qzone"></a>
+        <a class="bds_tsina"></a>
+        <a class="bds_tqq"></a>
+        <a class="bds_renren"></a>
+        <a class="bds_t163"></a>
+        <a class="shareCount"></a>
+        </div>
+        <script type="text/javascript" id="bdshare_js" data="type=tools&amp;uid=2270064" ></script>
+        <script type="text/javascript" id="bdshell_js"></script>
+        <script type="text/javascript">
+        document.getElementById("bdshell_js").src = "http://bdimg.share.baidu.com/static/js/shell_v2.js?cdnversion=" + Math.ceil(new Date()/3600000)
+        </script>
+        <!-- Baidu Button END -->
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+<section id="comment">
+<!-- Duoshuo Comment BEGIN -->
+  <div class="ds-thread"></div>
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"brotherb"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = 'http://static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+  </script>
+<!-- Duoshuo Comment END -->        
+</section>
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="搜索">
+    <input type="hidden" name="q" value="site:brotherb.info">
+  </form>
+</div>
+
+  
+<div class="widget tag">
+  <h3 class="title">分类</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/C/">C</a><small>1</small></li>
+  
+    <li><a href="/categories/python/">python</a><small>1</small></li>
+  
+    <li><a href="/categories/译文/">译文</a><small>2</small></li>
+  
+    <li><a href="/categories/读书/">读书</a><small>1</small></li>
+  
+    <li><a href="/categories/闲聊/">闲聊</a><small>4</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tagcloud">
+  <h3 class="title">标签云</h3>
+  <div class="entry">
+    <a href="/tags/Clojure/" style="font-size: 10.00px;">Clojure</a><a href="/tags/C语言/" style="font-size: 10.00px;">C语言</a><a href="/tags/IDE/" style="font-size: 10.00px;">IDE</a><a href="/tags/blog/" style="font-size: 10.00px;">blog</a><a href="/tags/github/" style="font-size: 10.00px;">github</a><a href="/tags/hexo/" style="font-size: 10.00px;">hexo</a><a href="/tags/linux/" style="font-size: 10.00px;">linux</a><a href="/tags/osX/" style="font-size: 10.00px;">osX</a><a href="/tags/python/" style="font-size: 10.00px;">python</a><a href="/tags/windows/" style="font-size: 10.00px;">windows</a><a href="/tags/函数式编程/" style="font-size: 10.00px;">函数式编程</a><a href="/tags/哲学/" style="font-size: 20.00px;">哲学</a><a href="/tags/思考/" style="font-size: 10.00px;">思考</a><a href="/tags/折腾/" style="font-size: 10.00px;">折腾</a><a href="/tags/操作系统/" style="font-size: 10.00px;">操作系统</a><a href="/tags/生活/" style="font-size: 10.00px;">生活</a><a href="/tags/编程感悟/" style="font-size: 20.00px;">编程感悟</a><a href="/tags/编辑器/" style="font-size: 10.00px;">编辑器</a><a href="/tags/读书/" style="font-size: 10.00px;">读书</a>
+  </div>
+</div>
+
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2013 Spike
+  
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+</body>
+</html>

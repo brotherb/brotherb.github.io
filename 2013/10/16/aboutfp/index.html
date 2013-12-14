@@ -1,0 +1,211 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>函数式编程浅见 | Spike's Blog</title>
+  <meta name="author" content="Spike">
+  
+  <meta name="description" content="This is Spike's personal blog">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="函数式编程浅见"/>
+  <meta property="og:site_name" content="Spike's Blog"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  <link href="/favicon.png" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Spike's Blog" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'true']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+</head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">Spike's Blog</a></h1>
+  <h2><a href="/">Keep It Simple</a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+  <li><a href="/atom.xml">RSS</a></li>
+    
+      <li><a href="/">首页</a></li>
+    
+      <li><a href="/archives">归档</a></li>
+    
+      <li><a href="/about">关于</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div>
+</header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2013-10-16T13:54:22.000Z"><a href="/2013/10/16/aboutfp/">10月 16 2013</a></time>
+      
+      
+  
+    <h1 class="title">函数式编程浅见</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>在暑假里我阅读了《黑客与画家》一书。书中作者描述了他的创业之路，其中他认为他能够创业成功，很大程度上靠的是他使用Common Lisp语言开发，因此获得了技术优势，使他的产品可以快速开发，快速迭代，并且难以复制。在黑客与画家最后几章里，作者Paul Graham基本都是在夸奖Lisp语言设计的精妙，思想的先进和超前，特性的优良，这与王垠的某些观点不谋而合。并且Paul认为，lisp是未来编程语言的发展方向。真的是这样吗？<a id="more"></a></p>
+<p>函数式编程是一种古老的编程范式，它在上个世纪五六十年代就发明了出来。Lisp是除Fortran以外第二古老的编程语言。但是不管是这种语言还是这种思想，在工程领域一直没有成为主流。现如今到了21世纪，函数式编程仿佛焕发了生机，被炒的相当热。对于这个现象，业界褒贬不一。此前我也提到，不少程序员喜欢装逼，当别人在讨论面向对象的时候，他们蹦出来侃侃而谈，痛批面向对象哲学的丑陋，赞颂函数式编程的优雅，嘴里说一些JAVA程序员听不懂的词语，如S表达式，惰性求值，类型推导，高阶函数，闭包等等(看着很像数学对吧？)，给人一种高人一等的感觉。这样的(没有意义的）讨论很大程度上是对函数式编程的一种过分夸大。就像是不管什么游戏，下面总有脑残(更有可能是腾讯的水军)嚷嚷说是抄袭CF，其实就是一种宣传。</p>
+<p>我是一个编程语言爱好者，但我不是任何一种编程语言的死忠。我最早是从王垠的文章中了解到函数式编程，在暑假里，我阅读了计算机程序的构造与解释的第一章(觉得很难啊)，学习了一些基本的scheme，并可以用它解决一些简单的问题。后来在寻求一种实用的FP语言的过程中，我认识了Clojure，还算认真地学了一段时间，并且完成了<a href="http://www.4clojure.com/problems" target="_blank">4clojure</a>上的一些练习题，我的solution已经分享到<a href="https://github.com/brotherb/4clojure" target="_blank">Github</a>上了(如果读者你有其它有趣的solutions，欢迎与我交流)。</p>
+<p>上手函数式编程，一开始给我的感觉是，有趣，强大，像是在玩数学游戏(具体的感受，做几道4clojure就体会到了)。它很适合解决递归问题，如这道<a href="http://www.4clojure.com/problem/106" target="_blank">深搜</a>或者求一个集合的全部子集这样的问题。可是过了一些时候，我发现它很难解决另外一类问题。这类问题的一个共同点就是，需要利用“副作用”来做，而函数式编程从本质上抵制副作用，不允许你使用，这也是它一个的卖点。比如我们知道，有一些动态规划问题，可以用等价的递归+打表(记忆方法)来解决。但是用纯粹的函数式的思维来说，很难解。因为根本就没有变量这种东西，也就没有表去供你去记录和改变状态。当然，Clojure是可以的，它提供了一个叫缓存的东西，还有一个memorize函数去记录计算过程中的一些中间值。Scheme我不知道，我猜也会有一种方法去记录一些东西。但是它提倡的彻底消灭“副作用”的主张就不能自圆其说了。</p>
+<p>所以很多利用“副作用”的算法，就不合适用函数式编程思想来做(虽然能做)。用C语言来做就是a piece of cake。</p>
+<p>但是，函数式编程又有它强大的一面，篇幅限制，这里我不打算科普函数式编程的常识，如果有心，你可以去阅读一些科普性的文章，它们到处都是。比如<a href="http://www.ruanyifeng.com/blog/2012/04/functional_programming.html" target="_blank">这一篇</a>。</p>
+<p>软件工程学一直以来都在致力于解决两个问题:</p>
+<ol>
+<li>如何控制软件的复杂度</li>
+<li>如何复用代码</li>
+</ol>
+<p>为此，产生了面向对象这种编程思想。但是，很多函数式编程的支持者认为，函数式编程具备更强的抽象能力。王垠对于面向对象几乎是<a href="http://www.zhihu.com/question/19728806" target="_blank">深恶痛绝</a>的。但是，我听起来觉得像是忽悠人的。因为，并没有任何可靠的证据证明两者在“抽象能力”上的差距。相反，很多大家耳熟能详的优秀的大型软件都是面向对象的产物，而函数式编程呢？没听说过。我一直不明白，既然都说Lisp那么牛逼，为什么现在软件开发基本上是C++,JAVA这些语言的天下呢？我昨天看到了一篇<a href="http://www.soimort.org//posts/124/index.html" target="_blank">非常好的文章</a>，也许它可以回答你的问题。</p>
+<p>当然，我对函数式编程也只是刚刚接触，以上只是一些非常主观的感受，希望日后可以有新的领悟。</p>
+<p>ps：开学一个多月，浑浑噩噩，完全没有学习的状态。为督促自己，以后每周至少一篇博客，以此为证。</p>
+
+      
+    </div>
+    <footer>
+      
+        
+  
+  <div class="categories">
+    <a href="/categories/闲聊/">闲聊</a>
+  </div>
+
+        
+  
+  <div class="tags">
+    <a href="/tags/函数式编程/">函数式编程</a>, <a href="/tags/Clojure/">Clojure</a>
+  </div>
+
+        <!-- Baidu Button BEGIN -->
+        <div id="bdshare" class="bdshare_t bds_tools get-codes-bdshare">
+        <span class="bds_more">分享到：</span>
+        <a class="bds_qzone"></a>
+        <a class="bds_tsina"></a>
+        <a class="bds_tqq"></a>
+        <a class="bds_renren"></a>
+        <a class="bds_t163"></a>
+        <a class="shareCount"></a>
+        </div>
+        <script type="text/javascript" id="bdshare_js" data="type=tools&amp;uid=2270064" ></script>
+        <script type="text/javascript" id="bdshell_js"></script>
+        <script type="text/javascript">
+        document.getElementById("bdshell_js").src = "http://bdimg.share.baidu.com/static/js/shell_v2.js?cdnversion=" + Math.ceil(new Date()/3600000)
+        </script>
+        <!-- Baidu Button END -->
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+<section id="comment">
+<!-- Duoshuo Comment BEGIN -->
+  <div class="ds-thread"></div>
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"brotherb"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = 'http://static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+  </script>
+<!-- Duoshuo Comment END -->        
+</section>
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="搜索">
+    <input type="hidden" name="q" value="site:brotherb.info">
+  </form>
+</div>
+
+  
+<div class="widget tag">
+  <h3 class="title">分类</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/C/">C</a><small>1</small></li>
+  
+    <li><a href="/categories/python/">python</a><small>1</small></li>
+  
+    <li><a href="/categories/译文/">译文</a><small>2</small></li>
+  
+    <li><a href="/categories/读书/">读书</a><small>1</small></li>
+  
+    <li><a href="/categories/闲聊/">闲聊</a><small>4</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tagcloud">
+  <h3 class="title">标签云</h3>
+  <div class="entry">
+    <a href="/tags/Clojure/" style="font-size: 10.00px;">Clojure</a><a href="/tags/C语言/" style="font-size: 10.00px;">C语言</a><a href="/tags/IDE/" style="font-size: 10.00px;">IDE</a><a href="/tags/blog/" style="font-size: 10.00px;">blog</a><a href="/tags/github/" style="font-size: 10.00px;">github</a><a href="/tags/hexo/" style="font-size: 10.00px;">hexo</a><a href="/tags/linux/" style="font-size: 10.00px;">linux</a><a href="/tags/osX/" style="font-size: 10.00px;">osX</a><a href="/tags/python/" style="font-size: 10.00px;">python</a><a href="/tags/windows/" style="font-size: 10.00px;">windows</a><a href="/tags/函数式编程/" style="font-size: 10.00px;">函数式编程</a><a href="/tags/哲学/" style="font-size: 20.00px;">哲学</a><a href="/tags/思考/" style="font-size: 10.00px;">思考</a><a href="/tags/折腾/" style="font-size: 10.00px;">折腾</a><a href="/tags/操作系统/" style="font-size: 10.00px;">操作系统</a><a href="/tags/生活/" style="font-size: 10.00px;">生活</a><a href="/tags/编程感悟/" style="font-size: 20.00px;">编程感悟</a><a href="/tags/编辑器/" style="font-size: 10.00px;">编辑器</a><a href="/tags/读书/" style="font-size: 10.00px;">读书</a>
+  </div>
+</div>
+
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2013 Spike
+  
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+</body>
+</html>

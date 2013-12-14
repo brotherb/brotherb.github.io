@@ -1,0 +1,251 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>程序员的老生常谈之开发工具 | Spike's Blog</title>
+  <meta name="author" content="Spike">
+  
+  <meta name="description" content="This is Spike's personal blog">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="程序员的老生常谈之开发工具"/>
+  <meta property="og:site_name" content="Spike's Blog"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  <link href="/favicon.png" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Spike's Blog" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'true']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+</head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">Spike's Blog</a></h1>
+  <h2><a href="/">Keep It Simple</a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+  <li><a href="/atom.xml">RSS</a></li>
+    
+      <li><a href="/">首页</a></li>
+    
+      <li><a href="/archives">归档</a></li>
+    
+      <li><a href="/about">关于</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div>
+</header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2013-07-27T12:08:14.000Z"><a href="/2013/07/27/programmer's-platitude1/">7月 27 2013</a></time>
+      
+      
+  
+    <h1 class="title">程序员的老生常谈之开发工具</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h3><strong>楔子</strong></h3>
+<hr>
+<p>自从我学习软件工程以来，我看到了一个有趣的现象：程序员们中间经常爆发圣战，战况空前激烈，为了自己的主义，常常争的面红耳赤，一副“来信砍”的姿态。我有时也会加入战局，并从中能拓宽一些知识面，了解到不同领域的技术状况。</p>
+<p>程序员们讨论的话题相当多，但对于一些月经话题，我现在基本上是视而不见的，比如以下几种：</p>
+<ol>
+<li><strong>IDE vs 文本编辑器 || Vim vs Emacs || 用xxx语言编程，你们用什么IDE or 编辑器？</strong></li>
+<li><strong>Windows vs Linux vs osX</strong></li>
+<li><strong>C/C++ vs JAVA vs C# vs Python vs Ruby vs …</strong><br><a id="more"></a><h3><strong>一些看法</strong></h3>
+</li>
+</ol>
+<hr>
+<p>对于第一个问题，简而言之，就是工具的选择。工欲善其事，必先利其器。当然了，使用什么工具是大家的自由，<strong>爱用什么用什么就行了</strong>。这里，主要写给那些长时间纠结Emacs or Vim的programmers，如果你(们)努力尝试过使用这个神器，但是始终没有进入理想的状态，你也许可以听听我的看法。</p>
+<p>首先，我推荐各位看客读一下王垠的<a href="http://www.yinwang.org/blog-cn/2013/04/20/editor-ide/" target="_blank">「编辑器与IDE」</a>一文。完全赞同他的观点。</p>
+<p>他在文中提到：</p>
+<blockquote>
+<p>很多人对 IDE 有偏见，因为他们认为这些工具让编程变得“傻瓜化”了，他们觉得写程序就是应该“困难”，所以他们眼看着免费的 IDE也不试一下。</p>
+</blockquote>
+<p>这是实话。程序员(尤其是爱折腾的程序员)往往喜欢故意为自己增加一些难度，并享受在高难度下完成任务的成就感，有时候他们所作的甚至偏离了要解决的问题本身。比如，程序员A说：”哈哈哈，我写了一个xxx，纯拿记事本写的，众屌丝速来跪舔！”或者，程序员B说：“哈哈哈，我写了一个xxx，但我用的是汇编语言！”下面一帮程序员随声附和。“膜拜！”“orz！”。其实，程序员可以不用活的那么累，用IDE省些时间吧，多陪陪老婆孩子，多运动一会。也有一句至理名言是这么说的：<strong>人生苦短，我用python</strong>。所以，<strong>要用对的，不用难的</strong>。</p>
+<p>另一方面，有一部分程序员喜欢装逼。所以，“Emacs，是一种信仰”便成为了他们的口头禅，开口闭口Emacs，鄙视别人用IDE。殊不知，<strong>拉开差距的并不是你用什么工具，而是你拥有什么知识，你有什么眼界，你知道怎么做人</strong>。</p>
+<p>剩下的就是真正的Emacs程序员了。一些老程序员并不认为用Emacs是增加难度，因为他们用惯了，vim和emacs诞生的年代早于现代通用keyboard shortcuts被标准化的时间(参考<a href="http://windows.appstorm.net/general/opinion/know-where-your-keyboard-shortcuts-come-from/" target="_blank">这里</a>)，所以他们从一开始就使用这么(我们认为)难的玩意，自然不可同日耳语。当然还有很多新程序员很牛，能真正发挥Emacs的威力，我在这里表示尊敬。</p>
+<p>更多精辟的见解，请直接移步<a href="http://www.yinwang.org/blog-cn/2013/04/20/editor-ide/" target="_blank">「编辑器与IDE」</a>一文。我在这里就不复制粘贴了。</p>
+<h3><strong>我用什么</strong></h3>
+<hr>
+<p>就个人来说，我是IDE的坚定支持者，我觉得道理很简单，在有洗衣机的情况下还用手洗衣服是不明智的，在有(非常好的)IDE的情况下故意使用一些老古董，<strong>我认为是一种退步</strong>，当然，我指的是做大项目的情况下，小代码都可以。我最喜欢的IDE是微软的<strong>Visual Studio</strong>，还有<strong><a href="http://www.jetbrains.com/" target="_blank">JetBrains</a></strong>的编程工具系列。Vim和Emacs都玩过，当然，只是玩过，即：配置各种东西。这两个东西确实很好玩，很神奇，扩展性非常强，你可以给它们配各种add-ons和plugins，然后enhance它们的features。</p>
+<p>有段时间，我决定做一个<strong>Hardcore Geek</strong>，使用Vim和Emacs来编程，为此，我配置了C++和python的开发环境。配置的过程是非常的愉快的，好玩。配好了以后，我觉得很神奇，确实“能用”，功能都实现了。但，也仅仅是“能用”而已，远没有传说的那么牛逼。而我追求的是，好用。首先，需要记忆的东西很多，按键复杂，尤其是Emacs。其次，不够智能。很遗憾，我没有在<a href="http://en.wikipedia.org/wiki/Richard_Stallman" target="_blank">Richard Stallman</a>的时代投身到计算机的世界中，那时候没啥好用的IDE，程序员只能用这些家伙来写代码，并且，确实写出了很多好的软件。使用这些编辑器的人现在都挺牛逼的。可能借助牛人的光环，以及一些程序员(尤其是老程序员)的宗教情节，外加有些程序员爱装逼。这两个编辑器被成为“<strong>编辑器之神</strong>”和“<strong>神之编辑器</strong>”，被推到了一个相当高的高度。我承认这两个名头确实有那么点意思，Vim的凭借它的编辑功能，最神的编辑器当之无愧;另一方面，使用Emacs的程序员之中有很多是大神级别的。</p>
+<p>目前来讲，我在使用linux的时候，会使用Vim编辑一些配置文件或者别的什么文本文件。东西好，得承认，在强大的编辑功能面前，我没啥话说。但不拿来写代码。Emacs的话，上次折腾它的新鲜劲过去了，说不定那天会改变主意，试着看看能不能用它来写点clojure之类的，我听一些人说，用Emacs写CL/elisp/clojure这些函数式语言，效果确实好。</p>
+<p>至于很多人在说效率的问题，<strong>一些IDE的编辑器可不像windows自带的记事本那么傻逼</strong>。你可以去看官方的Manual，里面包含了很多的tricks，shortcuts，snippets etc.</p>
+<ul>
+<li><p>关于Visual Studio，我推荐一本书<a href="http://www.microsoft.com/MSPress/books/13221.aspx" target="_blank">「Microsoft Visual Studio Tips」</a>。里面有很多有用的tips，如果能全部掌握，我保证，你的效率绝对不会差。如果你还是觉得不够，你可以安装<a href="http://visualstudiogallery.msdn.microsoft.com/59ca71b3-a4a3-46ca-8fe1-0e90e3f79329/" target="_blank">VsVim</a>这个插件，将Vim的编辑能力和VS的项目管理能力和强大的调试能力相结合，你，将是无敌的存在。</p>
+</li>
+<li><p>关于JetBrains的产品，我觉得真心好。爱美是人的天性。没有人会喜欢丑陋的东西。所以苹果的产品卖的好。JetBrains的东西，就一个字，<strong>美</strong>。一直以来，我以为Java是做不出什么好UI的(设计模式课上见识了很多java写的桌面软件，基本上都丑的一逼)，eclipse已经是它的极限了，至于为什么，请看<a href="http://www.zhihu.com/question/19711713" target="_blank">这里</a>。但我没想到，JetBrain的开发工具，都是用java做的。它是对程序员最友好的IDE，他的配置极其方便，(<strong>我认为VS在这方面要向JetBrains好好学习一下</strong>)，并且它非常智能。目前我使用Intellij IDEA来写java和clojure，使用PyCharm写Python程序，体验非常好。</p>
+</li>
+<li><p>文本编辑器我使用<strong><a href="http://www.sublimetext.com/" target="_blank">Sublime Text2</a></strong>多一些，这篇文章就是用Sublime编辑的。有时候，虽然有一些小问题(至于什么问题，有空再聊)，但瑕不掩瑜。Sublime用户体验非常好，美观，优雅，扩展性不错，插件也还算多。算是Vim的小DD吧。</p>
+</li>
+</ul>
+<h3><strong>一些说明</strong></h3>
+<hr>
+<p>关于以上提到的工具：</p>
+<ul>
+<li><p>Visual Studio我使用的是Visual Studio 2012 Express For Windows Desktop，免费的。我喜欢简洁，不喜欢无关的东西，Visual Studio 2012就算在安装的时候去除所有的components，还是会给你装一些无关的东西(Express也会装，但是装的少一些)，如VB，F#，silverlight，sql server express等等n多用不到的东西。目前我需要的只是一个C/C++/C#的IDE。Express版的缺点是不能装插件，如Visual AssistX，PTVS(Python Tools for Visual Studio)，都装不了，凑和着用吧，结合上文提到的「Microsoft Visual Studio Tips」，用着还行。如果是学生朋友，请利用这一便利，你可以从<a href="https://www.dreamspark.com/Student/Software-Catalog.aspx" target="_blank">这里</a>免费得到微软的大部分开发工具。如果既想简洁，高定制性，又想装插件，还不想受“使用盗版软件”这一良心的谴责，请看<a href="http://www.cnblogs.com/xiaotie/archive/2013/02/22/2922204.html" target="_blank">「DIY 一套正版、免费、强大的 Visual Studio 2012 IDE」</a>一文。</p>
+</li>
+<li><p>Intellij IDEA使用的是社区版，free of charge，通过安装插件的方式，你可以把它扩展成为别的一些语言的IDE，如clojure，具体方法自行谷歌。</p>
+</li>
+<li>Sublime Text 2一个licence是70刀，但是你不注册也可以使用，只不过偶尔会给你弹个框。<strong>阿里噶多，哦赛衣妈斯！好人一生平安！</strong></li>
+<li>PyCharm在30天的试用期后，<strong>我选择了破解，惭愧</strong>。。。</li>
+</ul>
+<h3><strong>postscripts</strong></h3>
+<hr>
+<ol>
+<li>关于D版和破解，由于现在尚且处于<strong>学生狗</strong>的阶段，我尽量使用免费的版本，对于特别喜欢的东西，只好说声抱歉了先，等工作了一定入正。</li>
+<li>本来还想讨论剩下的两个问题，但是已经写了这么多了，就下次再聊吧～</li>
+<li>(几乎)对于linux下的C/C++，IDE也是有选择的，如eclipse+CDT和code::blocks，但我觉得上次配的Vim环境也还凑和，或许也是一个不错的选择，主要是我对Vim还算比较熟。</li>
+<li>本文4000多字，写完感觉不累，<strong>远比2000字的事迹材料，或者思想汇报要好得多啊</strong>。</li>
+</ol>
+
+      
+    </div>
+    <footer>
+      
+        
+  
+  <div class="categories">
+    <a href="/categories/闲聊/">闲聊</a>
+  </div>
+
+        
+  
+  <div class="tags">
+    <a href="/tags/IDE/">IDE</a>, <a href="/tags/编辑器/">编辑器</a>
+  </div>
+
+        <!-- Baidu Button BEGIN -->
+        <div id="bdshare" class="bdshare_t bds_tools get-codes-bdshare">
+        <span class="bds_more">分享到：</span>
+        <a class="bds_qzone"></a>
+        <a class="bds_tsina"></a>
+        <a class="bds_tqq"></a>
+        <a class="bds_renren"></a>
+        <a class="bds_t163"></a>
+        <a class="shareCount"></a>
+        </div>
+        <script type="text/javascript" id="bdshare_js" data="type=tools&amp;uid=2270064" ></script>
+        <script type="text/javascript" id="bdshell_js"></script>
+        <script type="text/javascript">
+        document.getElementById("bdshell_js").src = "http://bdimg.share.baidu.com/static/js/shell_v2.js?cdnversion=" + Math.ceil(new Date()/3600000)
+        </script>
+        <!-- Baidu Button END -->
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+<section id="comment">
+<!-- Duoshuo Comment BEGIN -->
+  <div class="ds-thread"></div>
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"brotherb"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = 'http://static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+  </script>
+<!-- Duoshuo Comment END -->        
+</section>
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="搜索">
+    <input type="hidden" name="q" value="site:brotherb.info">
+  </form>
+</div>
+
+  
+<div class="widget tag">
+  <h3 class="title">分类</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/C/">C</a><small>1</small></li>
+  
+    <li><a href="/categories/python/">python</a><small>1</small></li>
+  
+    <li><a href="/categories/译文/">译文</a><small>2</small></li>
+  
+    <li><a href="/categories/读书/">读书</a><small>1</small></li>
+  
+    <li><a href="/categories/闲聊/">闲聊</a><small>4</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tagcloud">
+  <h3 class="title">标签云</h3>
+  <div class="entry">
+    <a href="/tags/Clojure/" style="font-size: 10.00px;">Clojure</a><a href="/tags/C语言/" style="font-size: 10.00px;">C语言</a><a href="/tags/IDE/" style="font-size: 10.00px;">IDE</a><a href="/tags/blog/" style="font-size: 10.00px;">blog</a><a href="/tags/github/" style="font-size: 10.00px;">github</a><a href="/tags/hexo/" style="font-size: 10.00px;">hexo</a><a href="/tags/linux/" style="font-size: 10.00px;">linux</a><a href="/tags/osX/" style="font-size: 10.00px;">osX</a><a href="/tags/python/" style="font-size: 10.00px;">python</a><a href="/tags/windows/" style="font-size: 10.00px;">windows</a><a href="/tags/函数式编程/" style="font-size: 10.00px;">函数式编程</a><a href="/tags/哲学/" style="font-size: 20.00px;">哲学</a><a href="/tags/思考/" style="font-size: 10.00px;">思考</a><a href="/tags/折腾/" style="font-size: 10.00px;">折腾</a><a href="/tags/操作系统/" style="font-size: 10.00px;">操作系统</a><a href="/tags/生活/" style="font-size: 10.00px;">生活</a><a href="/tags/编程感悟/" style="font-size: 20.00px;">编程感悟</a><a href="/tags/编辑器/" style="font-size: 10.00px;">编辑器</a><a href="/tags/读书/" style="font-size: 10.00px;">读书</a>
+  </div>
+</div>
+
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2013 Spike
+  
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+</body>
+</html>

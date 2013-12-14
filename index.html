@@ -1,0 +1,333 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Spike's Blog</title>
+  <meta name="author" content="Spike">
+  
+  <meta name="description" content="This is Spike's personal blog">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+  <meta property="og:site_name" content="Spike's Blog"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  <link href="/favicon.png" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Spike's Blog" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'true']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+</head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">Spike's Blog</a></h1>
+  <h2><a href="/">Keep It Simple</a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+  <li><a href="/atom.xml">RSS</a></li>
+    
+      <li><a href="/">首页</a></li>
+    
+      <li><a href="/archives">归档</a></li>
+    
+      <li><a href="/about">关于</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div>
+</header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper">
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2013-11-10T14:48:29.000Z"><a href="/2013/11/10/readbuddha/">11月 10 2013</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2013/11/10/readbuddha/">读「佛，到底讲了些什么」有感</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h2>前言</h2>
+<p>在进入研一之后，我发现自己读的书真的很少，尤其是在人文方面，因此，我决定没事的时候多读一点书，变得理智一点，提高自己的情商。<strong>我一个喜欢读书的舍友</strong>对我影响很大，坚定了我读书的信念。在他的影响下，我接触了正版的电子书，而不是网上随便down一个pdf，或者txt。因为花了钱的东西，总会比较珍视，况且现在觉得，一部iphone土豪金对自己的价值可能真的不如一部好书，并且后者没那么贵，也不需要炒，使用寿命也特别长，甚至是一生受用的。</p>
+<p>近几年，为了缩小体积，携带方便，数字化阅读的发展前景可谓是一往无前，对传统纸媒也造成了巨大的冲击。这里推荐2个应用吧，我使用多看阅读和豆瓣阅读。关于现在众多的电子书app的对比，这里有一个比较好的<a href="http://www.zhihu.com/question/20933281/answer/17366556" target="_blank">回答</a>。我主要使用多看，因为豆瓣阅读偏文艺的书居多，多看里面的书比较对我的胃口。此外，多看常搞特价，里面每天限时免费一本书，很划得来。
+      
+    </div>
+    <footer>
+      
+        
+          <div class="alignleft">
+            <a href="/2013/11/10/readbuddha/#more" class="more-link">Read More</a>
+          </div>
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2013-10-30T07:49:00.000Z"><a href="/2013/10/30/setup-python-env/">10月 30 2013</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2013/10/30/setup-python-env/">我的python环境配置</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>我使用ubuntu12.04,系统自带的python版本是2.7.3。在/usr/bin目录下面。不要动它，如果2.7.3可以满足需要，就看下面的一般配置就足够了。</p>
+<h2>一般配置</h2>
+<ol>
+<li>安装setuptools</li>
+<li>安装pip</li>
+<li>安装virtualenvwrapper(用pip，pip会自动安装目标包的依赖包如virtualenv等)</li>
+<li>配置好virtualenvwrapper(见<a href="http://virtualenvwrapper.readthedocs.org/en/latest/" target="_blank">官方文档</a>),并创建一个隔离的python环境(以后一般的工作都在这个环境中进行，假定这个环境的名字是dev)。</li>
+<li>进入dev。</li>
+<li>sudo apt-get install Python-dev(下一步中安装pyzmq需要这一步)</li>
+<li>安装ipython, pyzmq, jinja2, tornado(这一步是为了安装ipython notebook)</li>
+</ol>
+<p>这样python的环境基本就配置好了，一般使用ipython notebook作为自己的repl，这个相当给力（此前我一直使用ipython qtconsole，但用了notebook之后，感觉qtconsole弱爆了）。
+      
+    </div>
+    <footer>
+      
+        
+          <div class="alignleft">
+            <a href="/2013/10/30/setup-python-env/#more" class="more-link">Read More</a>
+          </div>
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2013-10-16T13:54:22.000Z"><a href="/2013/10/16/aboutfp/">10月 16 2013</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2013/10/16/aboutfp/">函数式编程浅见</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>在暑假里我阅读了《黑客与画家》一书。书中作者描述了他的创业之路，其中他认为他能够创业成功，很大程度上靠的是他使用Common Lisp语言开发，因此获得了技术优势，使他的产品可以快速开发，快速迭代，并且难以复制。在黑客与画家最后几章里，作者Paul Graham基本都是在夸奖Lisp语言设计的精妙，思想的先进和超前，特性的优良，这与王垠的某些观点不谋而合。并且Paul认为，lisp是未来编程语言的发展方向。真的是这样吗？
+      
+    </div>
+    <footer>
+      
+        
+          <div class="alignleft">
+            <a href="/2013/10/16/aboutfp/#more" class="more-link">Read More</a>
+          </div>
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2013-08-25T05:57:45.000Z"><a href="/2013/08/25/programmer's-platitude2/">8月 25 2013</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2013/08/25/programmer's-platitude2/">程序员的老生常谈之操作系统</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>今天早上和发小出去打球，意外扭伤了脚踝，回了家网络也不好，百无聊赖之际，就想写点东西。</p>
+<p><a href="http://brotherb.info/2013/07/27/programmers-platitude1/">上篇文章</a>里，我大致谈了我对开发工具的一些看法，以及我比较喜欢的开发工具。本文主要谈谈我对操作系统的看法，其中不涉及任何有关内核、原理等方面的内容，单纯地从一个使用者的角度来谈。
+      
+    </div>
+    <footer>
+      
+        
+          <div class="alignleft">
+            <a href="/2013/08/25/programmer's-platitude2/#more" class="more-link">Read More</a>
+          </div>
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2013-08-23T05:21:56.000Z"><a href="/2013/08/23/4-things-i-wish-i-would-have-known/">8月 23 2013</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2013/08/23/4-things-i-wish-i-would-have-known/">开始软件开发生涯时你需要知道的几件事</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p><a href="http://simpleprogrammer.com/2013/08/19/software-development-career/?utm_source=rss&amp;utm_medium=rss&amp;utm_campaign=software-development-career" target="_blank">英文原文：[4 Things I Wish I Would Have Known When I Started My Software Development Career</a>]</p>
+<p>我的软件开发生涯开始于大约15年以前。</p>
+<p>但仅在最近的5年里，我才真正开始看到我的提高。</p>
+<p>下面这些事情，我希望在进入软件开发领域时我已经知道了。如果我早点知道这些事儿，我将会变得更加成功。
+      
+    </div>
+    <footer>
+      
+        
+          <div class="alignleft">
+            <a href="/2013/08/23/4-things-i-wish-i-would-have-known/#more" class="more-link">Read More</a>
+          </div>
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+
+
+<nav id="pagination">
+  
+  
+    <a href="/page/2/" class="alignright next">下一页</a>
+  
+  <div class="clearfix"></div>
+</nav></div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="搜索">
+    <input type="hidden" name="q" value="site:brotherb.info">
+  </form>
+</div>
+
+  
+<div class="widget tag">
+  <h3 class="title">分类</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/C/">C</a><small>1</small></li>
+  
+    <li><a href="/categories/python/">python</a><small>1</small></li>
+  
+    <li><a href="/categories/译文/">译文</a><small>2</small></li>
+  
+    <li><a href="/categories/读书/">读书</a><small>1</small></li>
+  
+    <li><a href="/categories/闲聊/">闲聊</a><small>4</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tagcloud">
+  <h3 class="title">标签云</h3>
+  <div class="entry">
+    <a href="/tags/Clojure/" style="font-size: 10.00px;">Clojure</a><a href="/tags/C语言/" style="font-size: 10.00px;">C语言</a><a href="/tags/IDE/" style="font-size: 10.00px;">IDE</a><a href="/tags/blog/" style="font-size: 10.00px;">blog</a><a href="/tags/github/" style="font-size: 10.00px;">github</a><a href="/tags/hexo/" style="font-size: 10.00px;">hexo</a><a href="/tags/linux/" style="font-size: 10.00px;">linux</a><a href="/tags/osX/" style="font-size: 10.00px;">osX</a><a href="/tags/python/" style="font-size: 10.00px;">python</a><a href="/tags/windows/" style="font-size: 10.00px;">windows</a><a href="/tags/函数式编程/" style="font-size: 10.00px;">函数式编程</a><a href="/tags/哲学/" style="font-size: 20.00px;">哲学</a><a href="/tags/思考/" style="font-size: 10.00px;">思考</a><a href="/tags/折腾/" style="font-size: 10.00px;">折腾</a><a href="/tags/操作系统/" style="font-size: 10.00px;">操作系统</a><a href="/tags/生活/" style="font-size: 10.00px;">生活</a><a href="/tags/编程感悟/" style="font-size: 20.00px;">编程感悟</a><a href="/tags/编辑器/" style="font-size: 10.00px;">编辑器</a><a href="/tags/读书/" style="font-size: 10.00px;">读书</a>
+  </div>
+</div>
+
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2013 Spike
+  
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+</body>
+</html>
